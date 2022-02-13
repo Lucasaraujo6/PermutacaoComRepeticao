@@ -7,13 +7,12 @@ public class App
 
     public static void main(String[] args) throws Exception 
     {
-        getValues();
         setValues();
         fillVector();
-        imprimir();
+        print();
     }
 
-    private static void imprimir() 
+    private static void print() 
     {
         for (int i = 0; i < qntdLinhas; i++) 
         {
@@ -60,29 +59,38 @@ public class App
 
     private static void setValues() 
     {
-        qntdLinhas = (int) Math.pow(valorMax, qntdColunas);
-        colUltimaAlteracao = qntdColunas - 1;
-        valores = new int[qntdLinhas][qntdColunas];
-    }
-
-    private static void getValues() 
-    {
         Scanner scan = new Scanner(System.in);
         do 
         {
             try 
             {
-                System.out.println("Digite, respectivamente, os valores de r e n:");
+                System.out.println("Digite, respectivamente, separados por espaço, os valores de r e n:");
+                
                 qntdColunas = scan.nextInt();
                 valorMax = scan.nextInt();
-                
+                if(2 > qntdColunas){
+                    System.out.println("O o valor de r deve ser maior ou igual a 2.");
+                }
+                if(qntdColunas > 10){
+                    System.out.println("O o valor de r deve ser menor ou igual a 10.");
+                }
+                if(valorMax > 20){
+                    System.out.println("O o valor de n deve ser menor ou igual a 20.");
+                }
+                if(1 > valorMax){
+                    System.out.println("O o valor de r deve ser maior ou igual a 1.");
+                }
             } catch (Exception e) 
             {
-                System.out.println("Valores inválidos!");
+                System.out.println("Você inseriu um valor inválido. Tente novamente.");
                 scan.nextLine();
             }
         } while (2 > qntdColunas || qntdColunas > 10 || valorMax > 20 || 1 > valorMax);
 
         scan.close();
+        qntdLinhas = (int) Math.pow(valorMax, qntdColunas);
+        colUltimaAlteracao = qntdColunas - 1;
+        valores = new int[qntdLinhas][qntdColunas];
     }
+
 }
